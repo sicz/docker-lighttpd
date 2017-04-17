@@ -10,8 +10,9 @@ container.
 ## Contents
 
 This container only contains essential components:
-- [sicz/docker-baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine) as base system
-- [ligttpd](https://www.lighttpd.net) as web server
+* [sicz/docker-baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
+  as base system.
+* [lighttpd](https://www.lighttpd.net) as web server.
 
 ## Getting started
 
@@ -23,7 +24,7 @@ on how to deploy the project on a live system.
 
 Clone GitHub repository to your working directory:
 ```bash
-git clone https://github.com/sicz/docker-baseimage-alpine
+git clone https://github.com/sicz/docker-lighttpd
 ```
 
 ### Usage
@@ -44,12 +45,12 @@ make shell      # Open shell in running container
 make rm         # Destroy running container
 ```
 
-`lighttpd` serving contents of it's `/var/www` directory and. All logs are
-send to Docker console.
+With default configuration `lighttpd` listening on port 8080, serving contents
+of it's `/var/www` directory and sending all logs to the Docker console.
 
 ## Deployment
 
-You can start with sample `docker-compose.yml` file:
+You can start with this sample `docker-compose.yml` file:
 ```yaml
 services:
   lighttpd:
