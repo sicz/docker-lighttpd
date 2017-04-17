@@ -4,7 +4,7 @@
 It exists to support the development of SICZ containers.**
 
 Lighttpd web server running in the
-[docker-baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
+[sicz/docker-baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
 container.
 
 ## Contents
