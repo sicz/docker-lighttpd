@@ -4,7 +4,7 @@ ENV \
   org.label-schema.schema-version="1.0" \
   org.label-schema.name="sicz/lighttpd" \
   org.label-schema.description="Lighttpd web server running in the sicz/docker-baseimage-alpine container." \
-  org.label-schema.build-date="2017-04-17T21:37:07Z" \
+  org.label-schema.build-date="2017-04-18T20:20:49Z" \
   org.label-schema.url="https://www.lighttpd.net" \
   org.label-schema.vcs-url="https://github.com/sicz/docker-ligttpd"
 
