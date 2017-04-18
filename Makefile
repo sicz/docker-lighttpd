@@ -20,7 +20,6 @@ restart: docker-stop docker-start
 status: docker-status
 logs: docker-logs
 logs-tail: docker-logs-tail
-exec: docker-exec
 shell: docker-shell
 
 include ../Mk/docker.container.mk
