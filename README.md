@@ -10,8 +10,8 @@ container.
 ## Contents
 
 This container only contains essential components:
-* [sicz/docker-baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
-  as base system.
+* [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
+  as base image.
 * [lighttpd](https://www.lighttpd.net) as web server.
 
 ## Getting started
