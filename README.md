@@ -3,9 +3,7 @@
 **This project is not aimed at public consumption.
 It exists to support the development of SICZ containers.**
 
-Lighttpd web server running in the
-[sicz/docker-baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
-container.
+A lighttpd web server based on [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine).
 
 ## Contents
 
