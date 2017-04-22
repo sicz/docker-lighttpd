@@ -1,13 +1,13 @@
-ALPINE_TAG		?= latest
+ALPINE_VERSION		?= latest
 
 DOCKER_PROJECT		= sicz
 DOCKER_NAME		= lighttpd
-DOCKER_TAG		= $(ALPINE_TAG)
+DOCKER_TAG		= $(ALPINE_VERSION)
 
 DOCKER_RUN_OPTS		= -v /var/run/docker.sock:/var/run/docker.sock
 
 .PHONY: all build rebuild deploy run up destroy down clean rm start stop restart
-.PHONY: status logs shell
+.PHONY: status logs shell test
 
 all: destroy build deploy logs-tail
 build: docker-build
@@ -21,5 +21,8 @@ status: docker-status
 logs: docker-logs
 logs-tail: docker-logs-tail
 shell: docker-shell
+
+test: run
+	@$(MAKE) docker-exec DOCKER_EXEC_CMD="echo 'Hello world!'"
 
 include ../Mk/docker.container.mk
