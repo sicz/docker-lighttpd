@@ -1,6 +1,6 @@
 # docker-lighttpd
 
-[![CircleCI Status Badge](https://circleci.com/gh/SICZ/docker-lighttpd.svg?style=shield&circle-token=e2810a9421a2eaf33f8c620d67876f7a86f6e784)](https://circleci.com/gh/SICZ/docker-lighttpd)
+[![CircleCI Status Badge](https://circleci.com/gh/sicz/docker-lighttpd.svg?style=shield&circle-token=e2810a9421a2eaf33f8c620d67876f7a86f6e784)](https://circleci.com/gh/sicz/docker-lighttpd)
 
 **This project is not aimed at public consumption.
 It exists to support the development of SICZ containers.**
