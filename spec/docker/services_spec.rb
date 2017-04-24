@@ -8,6 +8,10 @@ describe "Services" do
   describe port(80) do
     it { should be_listening.with('tcp') }
   end
+  describe command("ls -al /var/www") do
+    its(:exit_status) { should eq 0 }
+    its(:stdout) { should eq "InDeX\n" }
+  end
   describe command("curl -s http://localhost") do
     its(:exit_status) { should eq 0 }
     its(:stdout) { should eq "InDeX\n" }

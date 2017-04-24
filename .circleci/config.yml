@@ -33,3 +33,4 @@ jobs:
           name: Run tests
           command: |
             env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
+            make logs
