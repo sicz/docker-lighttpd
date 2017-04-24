@@ -2,6 +2,13 @@
 
 debug0 "Processing $(basename ${DOCKER_ENTRYPOINT:-$0})"
 
-# Docker entrypoint configuration
-DOCKER_COMMAND=lighttpd
-DOCKER_USER=lighttpd
+# Default user
+: ${DOCKER_USER:=lighttpd}
+
+# Default command
+: ${DOCKER_COMMAND:=lighttpd}
+
+# First arg is option (-o or --option)
+if [ "${1:0:1}" = '-' ]; then
+	set -- ${DOCKER_COMMAND} "$@"
+fi
