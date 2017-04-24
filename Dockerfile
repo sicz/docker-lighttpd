@@ -1,15 +1,11 @@
 FROM sicz/baseimage-alpine:3.5
 
-ENV \
-  org.label-schema.schema-version="1.0" \
-  org.label-schema.name="sicz/lighttpd" \
-  org.label-schema.description="Lighttpd web server running in the sicz/docker-baseimage-alpine container." \
-  org.label-schema.build-date="2017-04-18T20:20:49Z" \
-  org.label-schema.url="https://www.lighttpd.net" \
-  org.label-schema.vcs-url="https://github.com/sicz/docker-lighttpd"
-
-ENV \
-  LIGHTTPD_DIR=/var/www
+ENV org.label-schema.schema-version="1.0"
+ENV org.label-schema.name="sicz/lighttpd"
+ENV org.label-schema.description="Lighttpd web server running in the sicz/docker-baseimage-alpine container."
+ENV org.label-schema.build-date="2017-04-18T20:20:49Z"
+ENV org.label-schema.url="https://www.lighttpd.net"
+ENV org.label-schema.vcs-url="https://github.com/sicz/docker-lighttpd"
 
 RUN set -x \
   && adduser -D -H -u 1000 lighttpd \
@@ -17,7 +13,7 @@ RUN set -x \
       lighttpd \
       lighttpd-mod_auth \
   && mkdir -p \
-      ${LIGHTTPD_DIR} \
+      /var/www \
       /var/cache/lighttpd \
       /var/lib/lighttpd \
       /var/log/lighttpd \

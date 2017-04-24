@@ -8,12 +8,12 @@ debug0 "Processing ${DOCKER_ENTRYPOINT:-$0}"
 if [ ! -e /tmp/stdout.log ]; then
   info "Redirecting access log to stdout"
   mkfifo -m 600 /tmp/stdout.log
-  chown lighttpd:lighttpd /tmp/stdout.log
+  chown ${DOCKER_USER}:${DOCKER_USER} /tmp/stdout.log
   cat <> /tmp/stdout.log &
 fi
 if [ ! -e /tmp/stderr.log ]; then
   info "Redirecting error log to stderr"
   mkfifo -m 600 /tmp/stderr.log
-  chown lighttpd:lighttpd /tmp/stderr.log
+  chown ${DOCKER_USER}:${DOCKER_USER} /tmp/stderr.log
   cat <> /tmp/stderr.log 1>&2 &
 fi
