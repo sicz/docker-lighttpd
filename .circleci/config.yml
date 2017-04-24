@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.04
+    working_directory: ~/docker-lighttpd
+    environment:
+      - MAKEFLAGS=--no-print-directory
+    steps:
+      - run:
+          name: Set up Environment
+          command: |
+            apk update
+            apk add --no-progress git make openssh-client
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run tests
+          command: |
+            curl -sSL https://github.com/SICZ/Mk/archive/master.tar.gz | tar -xzf -
+            mv Mk-master ~/Mk
+            make rebuild
+            make test

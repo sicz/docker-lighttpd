@@ -21,9 +21,12 @@ RUN set -x \
       /var/cache/lighttpd \
       /var/lib/lighttpd \
       /var/log/lighttpd \
+  && lighttpd -v \
   ;
 
 COPY config /etc
 COPY docker-entrypoint.d /docker-entrypoint.d
+
+EXPOSE 80
 
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]

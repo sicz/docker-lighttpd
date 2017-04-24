@@ -2,9 +2,6 @@
 
 debug0 "Processing $(basename ${DOCKER_ENTRYPOINT:-$0})"
 
-# Default user
-: ${DOCKER_USER:=lighttpd}
-
 # Default command
 : ${DOCKER_COMMAND:=lighttpd}
 
