@@ -32,8 +32,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            echo "> docker inspect `cat .container_id`"
-            docker inspect `cat .container_id`
+            docker cp spec/fixtures/www  `cat .container_id`:/var/www
             echo
             echo "> ls -lRat ${PWD}/spec"
             ls -lRat ${PWD}/spec
