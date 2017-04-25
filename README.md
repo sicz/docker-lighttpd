@@ -3,7 +3,7 @@
 [![CircleCI Status Badge](https://circleci.com/gh/sicz/docker-lighttpd.svg?style=shield&circle-token=e2810a9421a2eaf33f8c620d67876f7a86f6e784)](https://circleci.com/gh/sicz/docker-lighttpd)
 
 **This project is not aimed at public consumption.
-It exists to support the development of SICZ containers.**
+It exists to serve as a single endpoint for SICZ containers.**
 
 A lighttpd web server based on [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine).
 
@@ -41,11 +41,12 @@ make restart    # Restart container
 make status     # Show container status
 make logs       # Show container logs
 make logs-tail  # Connect to container logs
+make test       # Run tests
 make shell      # Open shell in running container
 make rm         # Destroy running container
 ```
 
-With default configuration `lighttpd` listening on port 8080, serving contents
+With default configuration `lighttpd` listening on port 80, serving contents
 of it's `/var/www` directory and sending all logs to the Docker console.
 
 ## Deployment
@@ -56,7 +57,7 @@ services:
   lighttpd:
     image: sicz/lighttpd:3.5
     ports:
-      - 8080:8080
+      - 8080:80
     volumes:
       - $PWD/www:/var/www
 ```
