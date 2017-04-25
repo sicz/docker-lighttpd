@@ -32,4 +32,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            docker inspect `cat .container_id`
+            ls -lRat
+            docker exec `cat .container_id` ls -lRat /var/www
             env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
