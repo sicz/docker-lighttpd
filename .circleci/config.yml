@@ -32,11 +32,13 @@ jobs:
       - run:
           name: Run tests
           command: |
+            echo "> docker inspect `cat .container_id`"
             docker inspect `cat .container_id`
-            echo "pwd: ${PWD}/spec"
+            echo
+            echo "> ls -lRat ${PWD}/spec"
             ls -lRat ${PWD}/spec
-            echo "pwd: /root/docker-lighttpd/spec"
-            ls -lRat /root/docker-lighttpd/spec
-            echo "Docker /var/www"
+            echo
+            echo "> docker exec `cat .container_id` ls -lRat /var/www"
             docker exec `cat .container_id` ls -lRat /var/www
+            echo
             env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
