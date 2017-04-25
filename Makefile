@@ -4,8 +4,8 @@ DOCKER_PROJECT		= sicz
 DOCKER_NAME		= lighttpd
 DOCKER_TAG		= $(ALPINE_VERSION)
 
-DOCKER_RUN_OPTS		= -v $(CURDIR)/spec/fixtures/www:/var/www \
-			  -v /var/run/docker.sock:/var/run/docker.sock
+DOCKER_RUN_OPTS		+= -v $(CURDIR)/spec/fixtures/www:/var/www \
+			   -v /var/run/docker.sock:/var/run/docker.sock
 
 .PHONY: all build rebuild deploy run up destroy down clean rm start stop restart
 .PHONY: status logs shell refresh test
