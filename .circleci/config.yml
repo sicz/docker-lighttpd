@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            docker cp spec/fixtures/www  `cat .container_id`:/var/www
+            docker cp spec/fixtures/www  `cat .container_id`:/var
             echo
             echo "> ls -lRat ${PWD}/spec"
             ls -lRat ${PWD}/spec
