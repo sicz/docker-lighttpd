@@ -33,11 +33,4 @@ jobs:
           name: Run tests
           command: |
             docker cp spec/fixtures/www  `cat .container_id`:/var
-            echo
-            echo "> ls -lRat ${PWD}/spec"
-            ls -lRat ${PWD}/spec
-            echo
-            echo "> docker exec `cat .container_id` ls -lRat /var/www"
-            docker exec `cat .container_id` ls -lRat /var/www
-            echo
             env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
