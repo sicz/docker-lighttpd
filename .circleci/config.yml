@@ -32,5 +32,5 @@ jobs:
       - run:
           name: Run tests
           command: |
-            docker cp spec/fixtures/www  `cat .container_id`:/var
+            docker cp spec/fixtures/www `cat .container_id`:/var
             env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
