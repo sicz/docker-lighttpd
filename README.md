@@ -33,7 +33,8 @@ Use command `make` to simplify Docker container development tasks:
 ```bash
 make all        # Destroy running container, build new image, run container and show logs
 make build      # Build new image
-make rebuild    # Refresh Dockerfile and build new image
+make refresh    # Refresh Dockerfile
+make rebuild    # Build new image without caching
 make run        # Run container
 make stop       # Stop running container
 make start      # Start stopped container
@@ -41,8 +42,8 @@ make restart    # Restart container
 make status     # Show container status
 make logs       # Show container logs
 make logs-tail  # Connect to container logs
-make test       # Run tests
 make shell      # Open shell in running container
+make test       # Run tests
 make rm         # Destroy running container
 ```
 
