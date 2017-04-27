@@ -28,6 +28,4 @@ RUN set -x \
 COPY config /etc
 COPY docker-entrypoint.d /docker-entrypoint.d
 
-EXPOSE 80
-
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
