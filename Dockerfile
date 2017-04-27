@@ -12,6 +12,7 @@ RUN set -x \
   && apk add --no-cache \
       lighttpd \
       lighttpd-mod_auth \
+  && rm -rf /var/www/* \
   && mkdir -p \
       /var/www \
       /var/cache/lighttpd \
