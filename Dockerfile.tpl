@@ -2,7 +2,7 @@ FROM sicz/baseimage-alpine:%%BASE_IMAGE_TAG%%
 
 ENV org.label-schema.schema-version="1.0"
 ENV org.label-schema.name="%%DOCKER_PROJECT%%/%%DOCKER_NAME%%"
-ENV org.label-schema.description="Lighttpd web server running in the sicz/docker-baseimage-alpine container."
+ENV org.label-schema.description="%%DOCKER_DESCRIPTION%%"
 ENV org.label-schema.build-date="%%REFRESHED_AT%%"
 ENV org.label-schema.url="https://www.lighttpd.net"
 ENV org.label-schema.vcs-url="https://github.com/%%DOCKER_PROJECT%%/docker-%%DOCKER_NAME%%"
@@ -28,4 +28,5 @@ RUN set -x \
 COPY config /etc
 COPY docker-entrypoint.d /docker-entrypoint.d
 
+ENV DOCKER_COMMAND=lighttpd
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]

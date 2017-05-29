@@ -11,8 +11,9 @@ describe "Web server" do
       "/etc/ssl/openssl.cnf",
     ].each do |file|
       context file do
-        it "exists" do
+        it "is installed" do
           expect(file(file)).to exist
+          expect(file(file)).to be_file
           expect(file(file)).to be_readable.by_user("lighttpd")
         end
       end

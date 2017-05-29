@@ -10,7 +10,7 @@ DOCKER_RUN_OPTS		+= -v $(CURDIR)/spec/fixtures/www:/var/www \
 .PHONY: all build rebuild deploy run up destroy down clean rm start stop restart
 .PHONY: status logs shell refresh test
 
-all: destroy build deploy logs-tail
+all: destroy build deploy logs test
 build: docker-build
 rebuild: docker-rebuild
 deploy run up: docker-deploy

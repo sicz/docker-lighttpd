@@ -31,7 +31,7 @@ git clone https://github.com/sicz/docker-lighttpd
 
 Use command `make` to simplify Docker container development tasks:
 ```bash
-make all        # Destroy running container, build new image, run container and show logs
+make all        # Destroy running container, build new image and run tests
 make build      # Build new image
 make refresh    # Refresh Dockerfile
 make rebuild    # Build new image without caching

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-debug0 "Processing ${DOCKER_ENTRYPOINT:-$0}"
+################################################################################
 
 # Redirect lighttpd logs to Docker console
 # - https://redmine.lighttpd.net/issues/2731#note-15
