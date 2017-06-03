@@ -56,7 +56,7 @@ You can start with this sample `docker-compose.yml` file:
 ```yaml
 services:
   lighttpd:
-    image: sicz/lighttpd:3.5
+    image: sicz/lighttpd
     ports:
       - 8080:80
     volumes:
