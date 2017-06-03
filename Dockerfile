@@ -3,7 +3,7 @@ FROM sicz/baseimage-alpine:3.6
 ENV org.label-schema.schema-version="1.0"
 ENV org.label-schema.name="sicz/lighttpd"
 ENV org.label-schema.description="A lighttpd web server based on Alpine Linux."
-ENV org.label-schema.build-date="2017-04-24T20:22:34Z"
+ENV org.label-schema.build-date="2017-06-03T20:53:33Z"
 ENV org.label-schema.url="https://www.lighttpd.net"
 ENV org.label-schema.vcs-url="https://github.com/sicz/docker-lighttpd"
 
@@ -25,8 +25,7 @@ RUN set -x \
   && lighttpd -v \
   ;
 
-COPY config /etc
-COPY docker-entrypoint.d /docker-entrypoint.d
+COPY config /
 
 ENV DOCKER_COMMAND=lighttpd
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
