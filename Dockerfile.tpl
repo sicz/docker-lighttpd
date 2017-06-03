@@ -25,8 +25,7 @@ RUN set -x \
   && lighttpd -v \
   ;
 
-COPY config /etc
-COPY docker-entrypoint.d /docker-entrypoint.d
+COPY config /
 
 ENV DOCKER_COMMAND=lighttpd
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
