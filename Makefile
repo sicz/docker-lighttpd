@@ -1,8 +1,11 @@
-ALPINE_VERSION		?= latest
+BASEIMAGE_NAME		= sicz/baseimage-alpine
+BASEIMAGE_TAG		= 3.6
 
-DOCKER_PROJECT		= sicz
+DOCKER_PROJECT		?= sicz
 DOCKER_NAME		= lighttpd
-DOCKER_TAG		= $(ALPINE_VERSION)
+DOCKER_TAG		= $(BASEIMAGE_TAG)
+DOCKER_DESCRIPTION	= A lighttpd web server based on Alpine Linux.
+DOCKER_PROJECT_URL	= https://www.lighttpd.net
 
 DOCKER_RUN_OPTS		+= -v $(CURDIR)/spec/fixtures/www:/var/www \
 			   -v /var/run/docker.sock:/var/run/docker.sock

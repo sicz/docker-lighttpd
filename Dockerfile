@@ -1,24 +1,40 @@
-FROM sicz/baseimage-alpine:3.6
+ARG BASEIMAGE_NAME
+ARG BASEIMAGE_TAG
+FROM ${BASEIMAGE_NAME}:${BASEIMAGE_TAG}
 
-ENV org.label-schema.schema-version="1.0"
-ENV org.label-schema.name="sicz/lighttpd"
-ENV org.label-schema.description="A lighttpd web server based on Alpine Linux."
-ENV org.label-schema.build-date="2017-06-03T20:53:33Z"
-ENV org.label-schema.url="https://www.lighttpd.net"
-ENV org.label-schema.vcs-url="https://github.com/sicz/docker-lighttpd"
+ARG DOCKER_IMAGE_NAME
+ARG DOCKER_TAG
+ARG DOCKER_DESCRIPTION
+ARG DOCKER_PROJECT_URL
+ARG BUILD_DATE
+ARG GITHUB_URL
+ARG VCS_REF
 
-RUN set -x \
+LABEL org.label-schema.schema-version="1.0"
+LABEL org.label-schema.name="${DOCKER_IMAGE_NAME}"
+LABEL org.label-schema.version="${DOCKER_TAG}"
+LABEL org.label-schema.description="${DOCKER_DESCRIPTION}"
+LABEL org.label-schema.url="${DOCKER_PROJECT_URL}"
+LABEL org.label-schema.vcs-url="${GITHUB_URL}"
+LABEL org.label-schema.vcs-ref="${VCS_REF}"
+LABEL org.label-schema.build-date="${BUILD_DATE}"
+
+RUN set -ex \
   && adduser -D -H -u 1000 lighttpd \
   && apk add --no-cache \
       lighttpd \
       lighttpd-mod_auth \
-  && rm -rf /var/www/* \
   && mkdir -p \
       /var/www \
       /var/cache/lighttpd \
       /var/lib/lighttpd \
       /var/log/lighttpd \
+  && rm -rf /var/www/* \
   && chown lighttpd:lighttpd \
+      /var/cache/lighttpd \
+      /var/lib/lighttpd \
+      /var/log/lighttpd \
+  && chmod 750 \
       /var/cache/lighttpd \
       /var/lib/lighttpd \
       /var/log/lighttpd \
@@ -28,4 +44,4 @@ RUN set -x \
 COPY config /
 
 ENV DOCKER_COMMAND=lighttpd
-CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
+CMD ["-D", "-f", "/etc/lighttpd/lighttpd.conf"]

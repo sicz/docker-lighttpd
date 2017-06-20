@@ -45,6 +45,7 @@ make logs-tail  # Connect to container logs
 make shell      # Open shell in running container
 make test       # Run tests
 make rm         # Destroy running container
+make clean      # Destroy running container and clean
 ```
 
 With default configuration `lighttpd` listening on port 80, serving contents

@@ -17,3 +17,5 @@ if [ ! -e /tmp/stderr.log ]; then
   chown lighttpd:lighttpd /tmp/stderr.log
   cat <> /tmp/stderr.log 1>&2 &
 fi
+
+################################################################################

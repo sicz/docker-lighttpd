@@ -3,23 +3,6 @@ require "docker_helper"
 
 describe "Web server" do
 
-  context "configuration file" do
-    [
-      "/etc/lighttpd/lighttpd.conf",
-      "/etc/lighttpd/logs.conf",
-      "/etc/lighttpd/server.conf",
-      "/etc/ssl/openssl.cnf",
-    ].each do |file|
-      context file do
-        it "is installed" do
-          expect(file(file)).to exist
-          expect(file(file)).to be_file
-          expect(file(file)).to be_readable.by_user("lighttpd")
-        end
-      end
-    end
-  end
-
   context "user 'lighttpd'" do
     it "has uid 1000" do
       expect(user("lighttpd")).to exist
@@ -34,6 +17,52 @@ describe "Web server" do
     it "has gid 1000" do
       expect(group("lighttpd")).to exist
       expect(group("lighttpd")).to have_gid(1000)
+    end
+  end
+
+  context "directory" do
+    [
+      "/var/www",
+    ].each do |dir|
+      context dir do
+        it "is installed" do
+          expect(file(dir)).to exist
+          expect(file(dir)).to be_directory
+          expect(file(dir)).to be_readable.by_user("lighttpd")
+        end
+      end
+    end
+    [
+      "/var/cache/lighttpd",
+      "/var/lib/lighttpd",
+      "/var/log/lighttpd",
+    ].each do |dir|
+      context dir do
+        it "is installed" do
+          expect(file(dir)).to exist
+          expect(file(dir)).to be_directory
+          expect(file(dir)).to be_owned_by("lighttpd")
+          expect(file(dir)).to be_grouped_into("lighttpd")
+          expect(file(dir)).to be_mode(750)
+        end
+      end
+    end
+  end
+
+  context "configuration file" do
+    [
+      "/etc/lighttpd/lighttpd.conf",
+      "/etc/lighttpd/logs.conf",
+      "/etc/lighttpd/server.conf",
+      "/etc/ssl/openssl.cnf",
+    ].each do |file|
+      context file do
+        it "is installed" do
+          expect(file(file)).to exist
+          expect(file(file)).to be_file
+          expect(file(file)).to be_readable.by_user("lighttpd")
+        end
+      end
     end
   end
 

@@ -19,11 +19,11 @@ jobs:
           command: |
             docker version
       - run:
-          name: Build Docker image
+          name: Build image
           command: |
             make rebuild
       - run:
-          name: Run Docker container
+          name: Run container
           command: |
             make run
             make logs
@@ -32,3 +32,10 @@ jobs:
           command: |
             docker cp spec/fixtures/www `cat .container_id`:/var
             env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
+      - deploy:
+          name: Push image to Docker Hub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWD}
+              make docker-push
+            fi
