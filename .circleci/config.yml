@@ -1,8 +1,9 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: sicz/dockerspec:3.6
+    # docker:
+    #   - image: sicz/dockerspec:3.6
+    machine: true
     working_directory: ~/docker-lighttpd
     environment:
       - MAKEFLAGS=--no-print-directory
@@ -13,7 +14,7 @@ jobs:
             curl -sSL https://github.com/SICZ/Mk/archive/master.tar.gz | tar -xzf -
             mv Mk-master ~/Mk
       - checkout
-      - setup_remote_docker
+      # - setup_remote_docker
       - run:
           name: Remote Docker engine version
           command: |
@@ -27,11 +28,15 @@ jobs:
           command: |
             make run
             make logs
+      # - run:
+      #     name: Run tests
+      #     command: |
+      #       docker cp spec/fixtures/www `cat .container_id`:/var
+      #       env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
       - run:
           name: Run tests
           command: |
-            docker cp spec/fixtures/www `cat .container_id`:/var
-            env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
+            make test DOCKER_TEST_CMD="--format doc"
       - deploy:
           name: Push image to Docker Hub
           command: |
