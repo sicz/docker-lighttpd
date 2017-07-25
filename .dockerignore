@@ -4,4 +4,4 @@
 .git
 
 # Tests
-**/spec
+spec

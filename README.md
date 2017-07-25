@@ -61,7 +61,8 @@ services:
     ports:
       - 8080:80
     volumes:
-      - $PWD/www:/var/www
+      - ./config/server.conf:/etc/lighttpd/server.conf
+      - ./www:/var/www
 ```
 
 ## Authors

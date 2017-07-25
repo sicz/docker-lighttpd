@@ -1,49 +1,43 @@
 version: 2
 jobs:
-  build:
-    # docker:
-    #   - image: sicz/dockerspec:3.6
-    machine: true
+  build: &build
+    docker:
+      - image: sicz/dockerspec@sha256:7e946e59349aae5d9f5c8639fd02d76c9a9e8de1e6dd03013d217f381a033ec2
     working_directory: ~/docker-lighttpd
     environment:
       - MAKEFLAGS=--no-print-directory
     steps:
-      - run:
-          name: Upgrade Docker Engine
-          command: |
-            docker version
-            curl -fsSL https://raw.githubusercontent.com/StefanScherer/docker-init/master/ubuntu/install-docker-ce.sh | sh
       - run:
           name: Set up Environment
           command: |
             curl -sSL https://github.com/SICZ/Mk/archive/master.tar.gz | tar -xzf -
             mv Mk-master ~/Mk
       - checkout
-      # - setup_remote_docker
+      - setup_remote_docker:
+          version: 17.06.0-ce
       - run:
           name: Remote Docker engine version
           command: |
             docker version
       - run:
-          name: Build image
+          name: Build and test latest Docker image
           command: |
-            make rebuild
+            make ci-rebuild-and-test DOCKER_TEST_CMD=rspec DOCKER_RSPEC_FORMAT=doc
       - run:
-          name: Run container
+          name: Build and test development Docker image
+          working_directory: devel
           command: |
-            make run
-            make logs
-      # - run:
-      #     name: Run tests
-      #     command: |
-      #       docker cp spec/fixtures/www `cat .container_id`:/var
-      #       env DOCKER_CONTAINER_ID=$(cat .container_id) rspec --format doc
-      - run:
-          name: Run tests
-          command: |
-            make test DOCKER_TEST_CMD="--format doc"
+            make ci-rebuild-and-test DOCKER_TEST_CMD=rspec DOCKER_RSPEC_FORMAT=doc
       - deploy:
-          name: Push image to Docker Hub
+          name: Push latest Docker image to Docker Hub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWD}
+              make docker-push
+            fi
+      - deploy:
+          name: Push development Docker image to Docker Hub
+          working_directory: devel
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWD}
