@@ -2,7 +2,7 @@ version: 2
 jobs:
   build: &build
     docker:
-      - image: sicz/dockerspec@sha256:7e946e59349aae5d9f5c8639fd02d76c9a9e8de1e6dd03013d217f381a033ec2
+      - image: sicz/dockerspec@sha256:fcc2eb828bc8ba898af410b46484725e424b9851d580278f5a2c4abdec5e5780
     working_directory: ~/docker-lighttpd
     environment:
       - MAKEFLAGS=--no-print-directory
