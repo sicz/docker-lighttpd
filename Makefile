@@ -13,7 +13,6 @@ DOCKER_DESCRIPTION	= A lighttpd web server based on Alpine Linux
 DOCKER_PROJECT_URL	= https://www.lighttpd.net
 
 DOCKER_RUN_OPTS		+= -v /var/run/docker.sock:/var/run/docker.sock
-			   #-v $(DOCKER_TEST_DIR)/spec/fixtures/www:/var/www
 
 DOCKER_SUBDIR		+= devel
 
