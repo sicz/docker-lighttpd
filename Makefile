@@ -1,13 +1,13 @@
 ################################################################################
 
 BASEIMAGE_NAME		= $(DOCKER_PROJECT)/baseimage-alpine
-BASEIMAGE_TAG		= 3.6
+BASEIMAGE_TAG		?= 3.6
 
 ################################################################################
 
 DOCKER_PROJECT		?= sicz
-DOCKER_NAME		= lighttpd
-DOCKER_TAG		= $(BASEIMAGE_TAG)
+DOCKER_NAME		?= lighttpd
+DOCKER_TAG		?= $(BASEIMAGE_TAG)
 DOCKER_TAGS		?= latest
 DOCKER_DESCRIPTION	= A lighttpd web server based on Alpine Linux
 DOCKER_PROJECT_URL	= https://www.lighttpd.net

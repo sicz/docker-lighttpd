@@ -2,7 +2,7 @@
 
 BASEIMAGE_TAG		?= edge
 DOCKER_TAG		?= 3
-DOCKER_TAGS		= devel
+DOCKER_TAGS		?= devel
 
 ################################################################################
 
