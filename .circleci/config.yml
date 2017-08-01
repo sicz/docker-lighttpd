@@ -22,12 +22,12 @@ jobs:
       - run:
           name: Build and test latest Docker image
           command: |
-            make ci-rebuild-and-test DOCKER_TEST_CMD=rspec DOCKER_RSPEC_FORMAT=doc
+            make ci-build-and-test DOCKER_TEST_IMAGE=
       - run:
           name: Build and test development Docker image
           working_directory: devel
           command: |
-            make ci-rebuild-and-test DOCKER_TEST_CMD=rspec DOCKER_RSPEC_FORMAT=doc
+            make ci-build-and-test DOCKER_TEST_IMAGE=
       - deploy:
           name: Push latest Docker image to Docker Hub
           command: |
