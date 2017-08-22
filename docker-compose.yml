@@ -1,0 +1,69 @@
+###
+### Default configuration
+###
+
+version: "3.3"
+
+networks:
+  default:
+
+services:
+  lighttpd:
+    image: ${DOCKER_IMAGE}
+    depends_on:
+      - simple_ca
+    environment:
+      # - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_INFO=true
+      - SERVER_CRT_HOST=${SERVER_CRT_HOST}
+      - SIMPLE_CA_URL=https://simple-ca.local
+    expose:
+      - 80/tcp
+      - 443/tcp
+    networks:
+      default:
+        aliases:
+          - lighttpd.local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  simple_ca:
+    image: ${SIMPLE_CA_IMAGE}
+    environment:
+      # - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_INFO=true
+      - SERVER_CRT_HOST=simple-ca.local
+    networks:
+      default:
+        aliases:
+          - simple-ca.local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - simple_ca_secrets:/var/lib/simple-ca/secrets
+
+  test:
+    image: ${TEST_IMAGE}
+    command: ${TEST_CMD}
+    depends_on:
+      - lighttpd
+    env_file:
+      - ${TEST_ENV_FILE}
+    environment:
+      - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_INFO=true
+      - WAIT_FOR_URL=http://lighttpd.local # https://lighttpd.local
+    networks:
+      default:
+        aliases:
+          - test.local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Use project dir as host volume for debugging tests if Docker host is local
+      - ${TEST_PROJECT_DIR:-test_project_dir}:${PROJECT_DIR}
+      - ${PROJECT_DIR}/../../prehor/specinfra:/usr/lib/ruby/gems/2.4.0/gems/specinfra-2.70.1
+      - ${PROJECT_DIR}/../../prehor/serverspec:/usr/lib/ruby/gems/2.4.0/gems/serverspec-2.40.0
+    working_dir: ${TEST_DIR}
+
+volumes:
+  test_project_dir:
+  simple_ca_secrets:
