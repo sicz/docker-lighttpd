@@ -45,10 +45,5 @@ RUN set -exo pipefail; \
 
 COPY config /
 
-# Lighttpd requires the certificate and the key to be together in one file,
-# so the server certificate must be placed in a private directory
-ENV SERVER_CRT_DIR=/etc/ssl/private
-ENV CA_CRT_FILE=/etc/ssl/certs/ca_crt.pem
-
 ENV DOCKER_COMMAND=/usr/sbin/lighttpd
 CMD ["-D", "-f", "/etc/lighttpd/lighttpd.conf"]

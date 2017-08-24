@@ -49,26 +49,41 @@ describe "Docker container", :test => :docker_container do
   describe "URLs" do
     # Download Simple CA certificate
     before(:context) do
-      ca_crt_file="/etc/ssl/certs/ca_crt.pem"
-      system("curl -ksS -o #{ca_crt_file} https://simple-ca.local/ca.pem")
+      ca_crt_file="/etc/ssl/certs/simple-ca.crt"
+      system("curl -fksS -o #{ca_crt_file} https://simple-ca.local/ca.crt")
       system("update-ca-certificates > /dev/null 2>&1")
       system("cat #{ca_crt_file} >> /etc/ssl/certs/ca-certificates.crt")
     end
     # Execute Serverspec command locally
     before(:each)  { set :backend, :exec }
     [
-      # [url,                   curl_opts,          exit_status, stdout]
-      ["http://lighttpd.local", "--location",       0,  IO.binread("spec/fixtures/www/index.html")],
-      ["https://lighttpd.local/index.html",  nil,   0,  IO.binread("spec/fixtures/www/index.html")],
-    ].each do |url, curl_opts, exit_status, stdout|
+      # [url, stdout, stderr]
+      [ "http://lighttpd.local",
+        "^#{IO.binread("spec/fixtures/www/index.html")}$",
+        "\\r\\n< HTTP/1.1 301 Moved Permanently\\r\\n< Location: https://lighttpd.local/\\r\\n",
+      ],
+      [ "http://lighttpd.local/index.html",
+        "^#{IO.binread("spec/fixtures/www/index.html")}$",
+        "\\r\\n< HTTP/1.1 301 Moved Permanently\\r\\n< Location: https://lighttpd.local/index.html\\r\\n",
+      ],
+      [ "https://lighttpd.local",
+        "^#{IO.binread("spec/fixtures/www/index.html")}$",
+      ],
+      [ "https://lighttpd.local/index.html",
+        "^#{IO.binread("spec/fixtures/www/index.html")}$",
+      ],
+    ].each do |url, stdout, stderr|
       context url do
-        subject { command("curl #{curl_opts} --silent --show-error #{url}") }
+        subject { command("curl --location --silent --show-error --verbose #{url}") }
         it "should exist" do
-          expect(subject.exit_status).to eq(exit_status)
+          expect(subject.exit_status).to eq(0)
         end
-        it "should return #{stdout.strip}" do
-          expect(subject.stdout).to eq(stdout)
+        it "should match \"#{stdout.gsub(/\n/, "\\n")}\"" do
+          expect(subject.stdout).to match(stdout)
         end unless stdout.nil?
+        it "should match \"#{stderr}\"" do
+          expect(subject.stderr).to match(stderr)
+        end unless stderr.nil?
       end
     end
   end

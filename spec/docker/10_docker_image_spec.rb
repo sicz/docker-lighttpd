@@ -68,9 +68,8 @@ describe "Docker image", :test => :docker_image do
     [
       # [file,                                            mode, user,       group,      [expectations]]
       ["/docker-entrypoint.sh",                           755, "root",      "root",     [:be_file]],
-      ["/docker-entrypoint.d/30-environment-certs.sh",    644, "root",      "root",     [:be_file]],
-      ["/docker-entrypoint.d/40-server-certs.sh",         644, "root",      "root",     [:be_file]],
-      ["/docker-entrypoint.d/45-lighttpd-certs.sh",       644, "root",      "root",     [:be_file, :eq_sha256sum]],
+      ["/docker-entrypoint.d/30-environment-lighttpd.sh", 644, "root",      "root",     [:be_file]],
+      ["/docker-entrypoint.d/48-lighttpd-cert.sh",        644, "root",      "root",     [:be_file]],
       ["/docker-entrypoint.d/50-lighttpd-logs.sh",        644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/etc/lighttpd/lighttpd.conf",                     644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/etc/lighttpd/logs.conf",                         644, "root",      "root",     [:be_file, :eq_sha256sum]],
