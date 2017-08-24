@@ -55,8 +55,8 @@ describe "Server certificate", :test => :server_cert do
   describe "Simple CA secrets" do
     [
       # [file]
-      ENV["CA_USER_NAME_FILE"]    || "/etc/ssl/private/ca_user.name",
-      ENV["CA_USER_PWD_FILE"]     || "/etc/ssl/private/ca_user.pwd",
+      "/run/secrets/ca_user.name",
+      "/run/secrets/ca_user.pwd",
     ].each do |file|
       context file(file) do
         it { is_expected.to be_file }

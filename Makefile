@@ -130,23 +130,20 @@ deploy run up:
 
 # Create containers
 .PHONY: create
-create: display-executor-config secrets docker-create .docker-$(DOCKER_EXECUTOR)-secrets
-	@true
+create: docker-create .docker-$(DOCKER_EXECUTOR)-create-www
 
-.docker-$(DOCKER_EXECUTOR)-secrets:
-	@$(ECHO) "Copying secrets to container $(CONTAINER_NAME)"
-	@docker cp secrets/ca_crt.pem  	$(CONTAINER_NAME):/etc/ssl/certs
-	@docker cp secrets/ca_user.name	$(CONTAINER_NAME):/etc/ssl/private
-	@docker cp secrets/ca_user.pwd	$(CONTAINER_NAME):/etc/ssl/private
-	@$(ECHO) "Copying spec/fixtures/www/index.html to container $(SIMPLE_CA_CONTAINER_NAME)"
+.docker-$(DOCKER_EXECUTOR)-create-www:
+	@$(ECHO) "Copying spec/fixtures/www to $(CONTAINER_NAME):/var/www"
 	@docker cp $(TEST_DIR)/spec/fixtures/www/index.html $(CONTAINER_NAME):/var/www
-	@$(ECHO) "Copying secrets to container $(SIMPLE_CA_CONTAINER_NAME)"
-	@@docker cp secrets $(SIMPLE_CA_CONTAINER_NAME):/var/lib/simple-ca
 	@$(ECHO) $(CONTAINER_NAME) > $@
 
 # Start containers
 .PHONY: start
 start: create docker-start
+
+# Wait to container start
+.PHONY: wait
+wait: start docker-wait
 
 # List running containers
 .PHONY: ps
@@ -187,32 +184,7 @@ destroy down rm: docker-destroy
 
 # Clean project
 .PHONY: clean
-clean: docker-clean clean-secrets
-
-### SIMPLE_CA_TARGETS ##########################################################
-
-# Create Simple CA secrets
-.PHONY: secrets
-secrets: secrets/ca_user.pwd
-	@true
-
-secrets/ca_user.pwd:
-	@$(ECHO) "Starting container $(SIMPLE_CA_CONTAINER_NAME) with command \"secrets\""
-	@docker run --interactive --tty --name=$(SIMPLE_CA_CONTAINER_NAME) $(SIMPLE_CA_IMAGE) secrets
-	@$(ECHO) "Copying secrets from container $(SIMPLE_CA_CONTAINER_NAME)"
-	@docker cp $(SIMPLE_CA_CONTAINER_NAME):/var/lib/simple-ca/secrets .
-	@$(ECHO) "Destroying container $(SIMPLE_CA_CONTAINER_NAME)"
-	@docker rm --force $(SIMPLE_CA_CONTAINER_NAME) > /dev/null
-
-# Clean Simple CA secrets
-.PHONY: clean-secrets
-clean-secrets:
-	@SECRET_FILES=$$(ls secrets/*.pem secrets/*.pwd secrets/*.name 2> /dev/null | tr '\n' ' ' || true); \
-	 if [ -n "$${SECRET_FILES}" ]; then \
-		$(ECHO) "Removing secrets: $${SECRET_FILES}"; \
-		chmod u+w $${SECRET_FILES}; \
-		rm -f $${SECRET_FILES}; \
-	 fi
+clean: docker-clean
 
 ### MK_DOCKER_IMAGE ############################################################
 
