@@ -6,8 +6,8 @@ BASE_IMAGE_TAG		?= 3.6
 ### DOCKER_IMAGE ###############################################################
 
 DOCKER_PROJECT		?= sicz
-DOCKER_PROJECT_DESC	= A lighttpd web server based on Alpine Linux
-DOCKER_PROJECT_URL	= https://www.lighttpd.net
+DOCKER_PROJECT_DESC	?= A lighttpd web server based on Alpine Linux
+DOCKER_PROJECT_URL	?= https://www.lighttpd.net
 
 DOCKER_NAME		?= lighttpd
 DOCKER_IMAGE_TAG	?= $(BASE_IMAGE_TAG)
@@ -98,7 +98,7 @@ DOCKER_ALL_VERSIONS_TARGETS ?= build rebuild ci clean
 # Build and test image
 .PHONY: all ci
 all: build deploy logs test
-ci:  all destroy
+ci:  all clean
 
 # Display make variables
 .PHONY: makevars vars
