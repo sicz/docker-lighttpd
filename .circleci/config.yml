@@ -3,7 +3,6 @@ jobs:
   build: &build
     docker:
       - image: sicz/dockerspec@sha256:b06e045ef6f508591777ed89e6fad6805d9b475ae39453d5ac022d26cda48437
-    working_directory: ~/docker-lighttpd
     environment:
       - MAKEFLAGS=--no-print-directory
       - RSPEC_FORMAT=doc
