@@ -14,7 +14,7 @@ DOCKER_IMAGE_TAG	?= $(shell echo $(LIGHTTPD_VERSION) | sed -E -e "s/-.*//")
 DOCKER_IMAGE_TAGS	?= latest
 DOCKER_IMAGE_DEPENDENCIES += $(SIMPLE_CA_IMAGE)
 
-### DOCKER_VERSIONS ###########################################################
+### DOCKER_VERSIONS ############################################################
 
 DOCKER_VERSIONS		?= latest devel
 
@@ -80,6 +80,8 @@ MAKE_VARS		?= GITHUB_MAKE_VARS \
 
 
 define BUILD_TARGETS_MAKE_VARS
+LIGHTTPD_VERSION:	$(LIGHTTPD_VERSION)
+
 DOCKER_BUILD_TARGET:	$(DOCKER_BUILD_TARGET)
 DOCKER_REBUILD_TARGET:	$(DOCKER_REBUILD_TARGET)
 endef
@@ -98,7 +100,7 @@ export CONFIG_MAKE_VARS
 
 DOCKER_ALL_VERSIONS_TARGETS ?= build rebuild ci clean
 
-### MAKE_TARGETS #############################################################
+### MAKE_TARGETS ###############################################################
 
 # Build and test image
 .PHONY: all ci
