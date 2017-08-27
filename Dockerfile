@@ -19,11 +19,13 @@ LABEL \
   org.label-schema.vcs-ref="${VCS_REF}" \
   org.label-schema.build-date="${BUILD_DATE}"
 
+ARG LIGHTTPD_VERSION
+
 RUN set -exo pipefail; \
   adduser -D -H -u 1000 lighttpd; \
   apk add --no-cache \
-    lighttpd \
-    lighttpd-mod_auth \
+    lighttpd=${LIGHTTPD_VERSION} \
+    lighttpd-mod_auth=${LIGHTTPD_VERSION} \
     ; \
   mkdir -p \
     /var/www \

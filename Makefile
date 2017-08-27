@@ -10,7 +10,7 @@ DOCKER_PROJECT_DESC	?= A lighttpd web server based on Alpine Linux
 DOCKER_PROJECT_URL	?= https://www.lighttpd.net
 
 DOCKER_NAME		?= lighttpd
-DOCKER_IMAGE_TAG	?= $(BASE_IMAGE_TAG)
+DOCKER_IMAGE_TAG	?= $(shell echo $(LIGHTTPD_VERSION) | sed -E -e "s/-.*//")
 DOCKER_IMAGE_TAGS	?= latest
 DOCKER_IMAGE_DEPENDENCIES += $(SIMPLE_CA_IMAGE)
 
@@ -19,6 +19,11 @@ DOCKER_IMAGE_DEPENDENCIES += $(SIMPLE_CA_IMAGE)
 DOCKER_VERSIONS		?= latest devel
 
 ### BUILD ######################################################################
+
+# Docker image build variables
+BUILD_VARS		+= LIGHTTPD_VERSION
+
+LIGHTTPD_VERSION	?= 1.4.45-r1
 
 # Allows a change of the build/restore targets to the docker-tag if
 # the development version is the same as the production version
