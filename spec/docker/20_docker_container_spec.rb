@@ -47,13 +47,6 @@ describe "Docker container", :test => :docker_container do
   ### URLS #####################################################################
 
   describe "URLs" do
-    # Download Simple CA certificate
-    before(:context) do
-      ca_crt_file="/etc/ssl/certs/simple-ca.crt"
-      system("curl -fksS -o #{ca_crt_file} https://simple-ca.local/ca.crt")
-      system("update-ca-certificates > /dev/null 2>&1")
-      system("cat #{ca_crt_file} >> /etc/ssl/certs/ca-certificates.crt")
-    end
     # Execute Serverspec command locally
     before(:each)  { set :backend, :exec }
     [
