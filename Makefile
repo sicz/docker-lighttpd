@@ -97,7 +97,7 @@ DOCKER_ALL_VERSIONS_TARGETS ?= build rebuild ci clean
 
 # Build and test image
 .PHONY: all ci
-all: build deploy logs test
+all: build up wait logs test
 ci:  all clean
 
 # Display make variables
@@ -122,11 +122,9 @@ rebuild: $(DOCKER_REBUILD_TARGET)
 .PHONY: config-file
 config-file: display-config-file
 
-# Destroy containers and then start fresh ones
-.PHONY: deploy run up
-deploy run up:
-	@set -e; \
-	$(MAKE) destroy start
+# Remove containers and then start fresh ones
+.PHONY: run up
+run up: docker-up
 
 # Create containers
 .PHONY: create
@@ -178,9 +176,9 @@ stop: docker-stop
 .PHONY: restart
 restart: stop start
 
-# Delete containers
-.PHONY: destroy down rm
-destroy down rm: docker-destroy
+# Remove containers
+.PHONY: down rm
+down rm: docker-rm
 
 # Clean project
 .PHONY: clean
