@@ -10,8 +10,8 @@ DOCKER_IMAGE_TAGS	?=
 
 # LIGHTTPD_VERSION	?= 1.4.45-r1
 
-# If image configuration variables are not defined, it is assumed that
-# the development image is the same as the production image
+# If the image configuration variables are not defined, the development image is
+# assumed to be the same as the production image
 BUILD_CONFIG		?= $(BASE_IMAGE_TAG) \
 			   $(LIGHTTPD_VERSION)
 
