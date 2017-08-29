@@ -26,7 +26,8 @@ BUILD_VARS		+= LIGHTTPD_VERSION
 LIGHTTPD_VERSION	?= 1.4.45-r1
 
 # Allows a change of the build/restore targets to the docker-tag if
-# the development version is the same as the production version
+# the development version is the same as the latest version
+DOCKER_CI_TARGET	?= all
 DOCKER_BUILD_TARGET	?= docker-build
 DOCKER_REBUILD_TARGET	?= docker-rebuild
 
@@ -104,11 +105,11 @@ DOCKER_ALL_VERSIONS_TARGETS ?= build rebuild ci clean
 
 # Remove the running containers, build a new image and run the tests
 .PHONY: all
-all: build up wait logs test
+all: clean build start wait logs test
 
 # Make clean the project and make all
 .PHONY: ci
-ci: clean all
+ci: $(DOCKER_CI_TARGET)
 	@$(MAKE) clean
 
 ### BUILD_TARGETS ##############################################################
