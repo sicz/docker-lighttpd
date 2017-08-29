@@ -22,14 +22,14 @@ on how to deploy the project on a live system.
 
 ### Installing
 
-Clone GitHub repository to your working directory:
+Clone the GitHub repository into your working directory:
 ```bash
 git clone https://github.com/sicz/docker-lighttpd
 ```
 
 ### Usage
 
-Use command `make` to simplify Docker container development tasks:
+Use the command `make` to simplify the Docker container development tasks:
 ```bash
 make all                # Remove the running containers, build a new image and run the tests
 make ci                 # Make all and clean the project
@@ -60,8 +60,9 @@ make docker-pull-testimage # Pull the test image from the Docker Registry
 make docker-push        # Push the project image into the Docker Registry
 ```
 
-With default configuration `lighttpd` listening on TCP ports 80 and 443, serving
-contents of it's `/var/www` directory and sending all logs to the Docker console.
+`lighttpd` with the default configuration listens on TCP ports 80 and 443,
+serves the contents of it's `/var/www` directory and sends all logs to
+the Docker console.
 
 ## Deployment
 
