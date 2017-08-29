@@ -2,7 +2,7 @@
 
 ################################################################################
 
-# Redirect lighttpd logs to Docker console
+# Redirect lighttpd logs to the Docker console
 # - https://redmine.lighttpd.net/issues/2731#note-15
 # - https://github.com/docker/docker/issues/6880#issuecomment-170214851
 if [ ! -e /tmp/stdout.log ]; then
