@@ -13,7 +13,7 @@ services:
     depends_on:
       - simple_ca
     environment:
-      # - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
       - SERVER_CRT_HOST=${SERVER_CRT_HOST}
       - SIMPLE_CA_URL=https://simple-ca.local
@@ -31,7 +31,7 @@ services:
   simple_ca:
     image: ${SIMPLE_CA_IMAGE}
     environment:
-      # - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
       - SERVER_CRT_HOST=simple-ca.local
     networks:
@@ -51,7 +51,7 @@ services:
     env_file:
       - ${TEST_ENV_FILE}
     environment:
-      # - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
       - WAIT_FOR_URL=http://lighttpd.local https://lighttpd.local
     networks:
@@ -70,7 +70,7 @@ services:
     depends_on:
       - lighttpd
     environment:
-      # - DOCKER_ENTRYPOINT_DEBUG=true
+      - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
       - WAIT_FOR_URL=http://lighttpd.local https://lighttpd.local
     networks:
