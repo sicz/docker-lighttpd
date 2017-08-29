@@ -31,8 +31,8 @@ git clone https://github.com/sicz/docker-lighttpd
 
 Use the command `make` to simplify the Docker container development tasks:
 ```bash
-make all                # Remove the running containers, build a new image and run the tests
-make ci                 # Make all and clean the project
+make all                # Build a new image and run the tests
+make ci                 # Build a new image and run the tests
 make build              # Build a new image
 make rebuild            # Build a new image without using the Docker layer caching
 make config-file        # Display the configuration file for the current configuration
@@ -75,9 +75,9 @@ services:
       - 8080:80
       - 8443:443
     volumes:
-      - ./config/server.conf:/etc/lighttpd/server.conf
-      - ./www:/var/www
       - ./secrets:/run/secrets
+      - ./config/server.conf:/etc/lighttpd/server.conf
+      - ./www/:/var/www
 ```
 
 ## Authors

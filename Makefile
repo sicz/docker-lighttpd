@@ -5,6 +5,8 @@ BASE_IMAGE_TAG		?= 3.6
 
 ### DOCKER_IMAGE ###############################################################
 
+LIGHTTPD_VERSION	?= 1.4.45-r1
+
 DOCKER_PROJECT		?= sicz
 DOCKER_PROJECT_DESC	?= A lighttpd web server based on Alpine Linux
 DOCKER_PROJECT_URL	?= https://www.lighttpd.net
@@ -22,8 +24,6 @@ DOCKER_VERSIONS		?= latest devel
 
 # Docker image build variables
 BUILD_VARS		+= LIGHTTPD_VERSION
-
-LIGHTTPD_VERSION	?= 1.4.45-r1
 
 # Allows a change of the build/restore targets to the docker-tag if
 # the development version is the same as the latest version
@@ -103,11 +103,11 @@ DOCKER_ALL_VERSIONS_TARGETS ?= build rebuild ci clean
 
 ### MAKE_TARGETS ###############################################################
 
-# Remove the running containers, build a new image and run the tests
+# Build a new image and run the tests
 .PHONY: all
-all: clean build start wait logs test
+all: build clean start wait logs test
 
-# Make clean the project and make all
+# Build a new image and run the tests
 .PHONY: ci
 ci: $(DOCKER_CI_TARGET)
 	@$(MAKE) clean
