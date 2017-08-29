@@ -3,13 +3,14 @@
 ################################################################################
 
 # Lighttpd requires the certificate and the key to be together in one file
-# TODO Lighttpd does not support encrypted private key
 if [ -e ${SERVER_CRT_FILE} -a -e ${SERVER_KEY_FILE} ]; then
-  info "Creating lighttpd certificate file ${SERVER_CRT_FILE}"
+  info "Creating lighttpd PEM keystore ${SERVER_CRT_FILE}"
+  # TODO Lighttpd does not support encrypted private key
+  # echo ${SERVER_KEY_FILE} >> ${SERVER_CRT_FILE}
   openssl rsa -in ${SERVER_KEY_FILE} -passin pass:${SERVER_KEY_PWD} >> ${SERVER_CRT_FILE}
   rm -f ${SERVER_KEY_FILE}
 elif [ -e ${SERVER_CRT_FILE} ]; then
-  info "Using lighttpd certificate file ${SERVER_CRT_FILE}"
+  info "Using lighttpd PEM keystore ${SERVER_CRT_FILE}"
 fi
 
 ################################################################################

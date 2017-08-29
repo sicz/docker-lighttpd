@@ -106,9 +106,10 @@ DOCKER_ALL_VERSIONS_TARGETS ?= build rebuild ci clean
 .PHONY: all
 all: build up wait logs test
 
-# Make all and clean the project
+# Make clean the project and make all
 .PHONY: ci
-ci: all clean
+ci: clean all
+	@$(MAKE) clean
 
 ### BUILD_TARGETS ##############################################################
 

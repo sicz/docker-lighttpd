@@ -21,4 +21,12 @@ LIGHTTPD_FILE_OWNER="${LIGHTTPD_USER}:${LIGHTTPD_GROUP}"
 # so the server certificate should not be readable by others
 : ${SERVER_CRT_FILE_MODE:=440}
 
+# TODO Lighttpd does not support encrypted private key
+# # Set default server private key passphrase file location
+# if [ -e /run/secrets/server.pwd ]; then
+#   : ${SERVER_KEY_PWD_FILE:=/run/secrets/server.pwd}
+# else
+#   : ${SERVER_KEY_PWD_FILE:=${SERVER_KEY_DIR}/server.pwd}
+# fi
+
 ################################################################################
