@@ -14,7 +14,6 @@ DOCKER_PROJECT_URL	?= https://www.lighttpd.net
 DOCKER_NAME		?= lighttpd
 DOCKER_IMAGE_TAG	?= $(shell echo $(LIGHTTPD_VERSION) | sed -E -e "s/-.*//")
 DOCKER_IMAGE_TAGS	?= latest
-DOCKER_IMAGE_DEPENDENCIES += $(SIMPLE_CA_IMAGE)
 
 ### DOCKER_VERSIONS ############################################################
 
@@ -44,6 +43,9 @@ COMPOSE_VARS		+= SERVER_CRT_HOST \
 SERVER_CRT_HOST		+= lighttpd.local
 
 ### SIMPLE_CA ##################################################################
+
+# Docker image dependencies
+DOCKER_IMAGE_DEPENDENCIES += $(SIMPLE_CA_IMAGE)
 
 # Simple CA image
 SIMPLE_CA_IMAGE_NAME	?= sicz/simple-ca
