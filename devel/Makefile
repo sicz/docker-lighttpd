@@ -8,7 +8,7 @@ DOCKER_IMAGE_TAGS	?=
 
 ### BUILD ######################################################################
 
-# LIGHTTPD_VERSION	?= 1.4.45-r1
+# LIGHTTPD_VERSION	?= 1.4.45
 
 # If the image configuration variables are not defined, the development image is
 # assumed to be the same as the latest image

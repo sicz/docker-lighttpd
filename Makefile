@@ -5,7 +5,7 @@ BASE_IMAGE_TAG		?= 3.6
 
 ### DOCKER_IMAGE ###############################################################
 
-LIGHTTPD_VERSION	?= 1.4.45-r1
+LIGHTTPD_VERSION	?= 1.4.45
 
 DOCKER_PROJECT		?= sicz
 DOCKER_PROJECT_DESC	?= A lighttpd web server based on Alpine Linux
