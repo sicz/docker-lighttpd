@@ -53,7 +53,9 @@ services:
     environment:
       - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
+      # Wait until the tested container is started
       - WAIT_FOR_URL=http://lighttpd.local https://lighttpd.local
+      - WAIT_FOR_TIMEOUT=5
     networks:
       default:
         aliases:
@@ -72,7 +74,9 @@ services:
     environment:
       - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
+      # Wait until the tested container is started
       - WAIT_FOR_URL=http://lighttpd.local https://lighttpd.local
+      - WAIT_FOR_TIMEOUT=5
     networks:
       default:
         aliases:
