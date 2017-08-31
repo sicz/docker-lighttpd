@@ -8,7 +8,7 @@ networks:
   default:
 
 services:
-  lighttpd:
+  container:
     image: ${DOCKER_IMAGE}
     depends_on:
       - simple_ca
@@ -23,7 +23,7 @@ services:
     networks:
       default:
         aliases:
-          - lighttpd.local
+          - container.local
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - simple_ca_secrets:/run/secrets:ro
@@ -47,19 +47,15 @@ services:
     image: ${TEST_IMAGE}
     command: ${TEST_CMD}
     depends_on:
-      - lighttpd
+      - container
     env_file:
       - ${TEST_ENV_FILE}
     environment:
       - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
       # Wait until the tested container is started
-      - WAIT_FOR_URL=http://lighttpd.local https://lighttpd.local
+      - WAIT_FOR_URL=http://container.local https://container.local
       - WAIT_FOR_TIMEOUT=5
-    networks:
-      default:
-        aliases:
-          - test.local
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - simple_ca_secrets:/run/secrets:ro
@@ -70,17 +66,13 @@ services:
   wait:
     image: ${TEST_IMAGE}
     depends_on:
-      - lighttpd
+      - container
     environment:
       - DOCKER_ENTRYPOINT_DEBUG=true
       - DOCKER_ENTRYPOINT_INFO=true
       # Wait until the tested container is started
-      - WAIT_FOR_URL=http://lighttpd.local https://lighttpd.local
+      - WAIT_FOR_URL=http://container.local https://container.local
       - WAIT_FOR_TIMEOUT=5
-    networks:
-      default:
-        aliases:
-          - wait.local
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - simple_ca_secrets:/run/secrets:ro
