@@ -51,18 +51,18 @@ describe "Docker container", :test => :docker_container do
     before(:each)  { set :backend, :exec }
     [
       # [url, stdout, stderr]
-      [ "http://lighttpd.local",
+      [ "http://#{ENV["SERVICE_NAME"]}.local",
         "^#{IO.binread("spec/fixtures/www/index.html")}$",
-        "\\r\\n< HTTP/1.1 301 Moved Permanently\\r\\n< Location: https://lighttpd.local/\\r\\n",
+        "\\r\\n< HTTP/1.1 301 Moved Permanently\\r\\n< Location: https://#{ENV["SERVICE_NAME"]}.local/\\r\\n",
       ],
-      [ "http://lighttpd.local/index.html",
+      [ "http://#{ENV["SERVICE_NAME"]}.local/index.html",
         "^#{IO.binread("spec/fixtures/www/index.html")}$",
-        "\\r\\n< HTTP/1.1 301 Moved Permanently\\r\\n< Location: https://lighttpd.local/index.html\\r\\n",
+        "\\r\\n< HTTP/1.1 301 Moved Permanently\\r\\n< Location: https://#{ENV["SERVICE_NAME"]}.local/index.html\\r\\n",
       ],
-      [ "https://lighttpd.local",
+      [ "https://#{ENV["SERVICE_NAME"]}.local",
         "^#{IO.binread("spec/fixtures/www/index.html")}$",
       ],
-      [ "https://lighttpd.local/index.html",
+      [ "https://#{ENV["SERVICE_NAME"]}.local/index.html",
         "^#{IO.binread("spec/fixtures/www/index.html")}$",
       ],
     ].each do |url, stdout, stderr|

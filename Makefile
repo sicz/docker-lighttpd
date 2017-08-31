@@ -43,6 +43,7 @@ SERVER_CRT_HOST		+= $(SERVICE_NAME).local
 
 # Variables used in the Docker Compose file
 COMPOSE_VARS		+= SERVER_CRT_HOST \
+			   SERVICE_NAME \
 			   SIMPLE_CA_IMAGE
 
 ### SIMPLE_CA ##################################################################
