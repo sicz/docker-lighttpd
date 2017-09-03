@@ -12,7 +12,7 @@ DOCKER_PROJECT_DESC	?= A lighttpd web server based on Alpine Linux
 DOCKER_PROJECT_URL	?= https://www.lighttpd.net
 
 DOCKER_NAME		?= lighttpd
-DOCKER_IMAGE_TAG	?= $(shell echo $(LIGHTTPD_VERSION) | sed -E -e "s/-.*//")
+DOCKER_IMAGE_TAG	?= $(LIGHTTPD_VERSION)
 DOCKER_IMAGE_TAGS	?= latest
 
 ### DOCKER_VERSIONS ############################################################
