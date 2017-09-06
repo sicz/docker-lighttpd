@@ -82,7 +82,8 @@ services:
 
 * [Petr Řehoř](https://github.com/prehor) - Initial work.
 
-See also the list of [contributors](https://github.com/sicz/docker-baseimage-alpine/contributors)
+See also the list of
+[contributors](https://github.com/sicz/docker-lighttpd/contributors)
 who participated in this project.
 
 ## License
