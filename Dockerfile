@@ -50,6 +50,6 @@ RUN set -exo pipefail; \
     ; \
   lighttpd -v
 
-COPY config /
+COPY rootfs /
 
 CMD ["-D", "-f", "/etc/lighttpd/lighttpd.conf"]
