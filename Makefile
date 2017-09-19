@@ -30,11 +30,8 @@ COMPOSE_VARS		+= SERVER_CRT_HOST \
 			   SERVICE_NAME \
 			   SIMPLE_CA_IMAGE
 
-# Use the same service name for all configurations
-SERVICE_NAME		?= container
-
 # Certificate subject aletrnative names
-SERVER_CRT_HOST		+= $(SERVICE_NAME).local
+SERVER_CRT_HOST		?= $(SERVICE_NAME).local
 
 ### SIMPLE_CA ##################################################################
 
