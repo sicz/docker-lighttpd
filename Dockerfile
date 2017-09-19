@@ -21,6 +21,10 @@ LABEL \
 
 ARG LIGHTTPD_VERSION
 
+ENV \
+  DOCKER_COMMAND="/usr/sbin/lighttpd" \
+  LIGHTTPD_VERSION="${LIGHTTPD_VERSION}"
+
 RUN set -exo pipefail; \
   adduser -D -H -u 1000 lighttpd; \
   apk add --no-cache \
@@ -48,5 +52,4 @@ RUN set -exo pipefail; \
 
 COPY config /
 
-ENV DOCKER_COMMAND=/usr/sbin/lighttpd
 CMD ["-D", "-f", "/etc/lighttpd/lighttpd.conf"]
