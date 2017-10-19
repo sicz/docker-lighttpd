@@ -29,4 +29,9 @@ LIGHTTPD_FILE_OWNER="${LIGHTTPD_USER}:${LIGHTTPD_GROUP}"
 #   : ${SERVER_KEY_PWD_FILE:=${SERVER_KEY_DIR}/server.pwd}
 # fi
 
+# Redirect logs to the Docker console
+DOCKER_LOG_FILE_OWNER="${LIGHTTPD_FILE_OWNER}"
+DOCKER_LOG_FILE="/var/log/docker.log"
+DOCKER_ERR_FILE="/var/log/docker.err"
+
 ################################################################################

@@ -70,13 +70,14 @@ describe "Docker image", :test => :docker_image do
       ["/docker-entrypoint.sh",                           755, "root",      "root",     [:be_file]],
       ["/docker-entrypoint.d/30-lighttpd-environment.sh", 644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/docker-entrypoint.d/47-lighttpd-cert.sh",        644, "root",      "root",     [:be_file, :eq_sha256sum]],
-      ["/docker-entrypoint.d/50-lighttpd-logs.sh",        644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/etc/lighttpd/lighttpd.conf",                     644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/etc/lighttpd/logs.conf",                         644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/etc/lighttpd/server.conf",                       644, "root",      "root",     [:be_file, :eq_sha256sum]],
       ["/etc/ssl/openssl.cnf",                            644, "root",      "root",     [:be_file]],
       ["/var/cache/lighttpd",                             750, "lighttpd",  "lighttpd", [:be_directory]],
       ["/var/lib/lighttpd",                               750, "lighttpd",  "lighttpd", [:be_directory]],
+      ["/var/log/docker.log",                             600, "lighttpd",  "lighttpd", [:be_pipe]],
+      ["/var/log/docker.err",                             600, "lighttpd",  "lighttpd", [:be_pipe]],
       ["/var/log/lighttpd",                               750, "lighttpd",  "lighttpd", [:be_directory]],
       ["/var/www",                                        755, "root",      "root",     [:be_directory]],
     ].each do |file, mode, user, group, expectations|
@@ -84,6 +85,7 @@ describe "Docker image", :test => :docker_image do
       context file(file) do
         it { is_expected.to exist }
         it { is_expected.to be_file }       if expectations.include?(:be_file)
+        it { is_expected.to be_pipe }       if expectations.include?(:be_pipe)
         it { is_expected.to be_directory }  if expectations.include?(:be_directory)
         it { is_expected.to be_mode(mode) } unless mode.nil?
         it { is_expected.to be_owned_by(user) } unless user.nil?
