@@ -5,12 +5,12 @@
 **This project is not aimed at public consumption.
 It exists to serve as a single endpoint for SICZ containers.**
 
-A lighttpd web server based on [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine).
+A lighttpd web server based on [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage).
 
 ## Contents
 
 This container only contains essential components:
-* [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage-alpine)
+* [sicz/baseimage-alpine](https://github.com/sicz/docker-baseimage)
   as a base image.
 * [lighttpd](https://www.lighttpd.net) provides a web server.
 
