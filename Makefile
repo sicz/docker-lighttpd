@@ -1,11 +1,11 @@
 ### BASE_IMAGE #################################################################
 
 BASE_IMAGE_NAME		?= $(DOCKER_PROJECT)/baseimage-alpine
-BASE_IMAGE_TAG		?= 3.6
+BASE_IMAGE_TAG		?= 3.7
 
 ### DOCKER_IMAGE ###############################################################
 
-LIGHTTPD_VERSION	?= 1.4.45
+LIGHTTPD_VERSION	?= 1.4.48
 
 DOCKER_PROJECT		?= sicz
 DOCKER_PROJECT_DESC	?= A lighttpd web server based on Alpine Linux
