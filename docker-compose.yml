@@ -17,9 +17,6 @@ services:
       - DOCKER_ENTRYPOINT_INFO=true
       - SERVER_CRT_HOST=${SERVER_CRT_HOST}
       - SIMPLE_CA_URL=https://simple-ca.local
-    expose:
-      - 80/tcp
-      - 443/tcp
     networks:
       default:
         aliases:
