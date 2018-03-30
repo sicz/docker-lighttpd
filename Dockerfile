@@ -10,8 +10,8 @@ ENV \
 RUN set -exo pipefail; \
   adduser -D -H -u 1000 lighttpd; \
   apk add --no-cache \
-    lighttpd>${LIGHTTPD_VERSION} \
-    lighttpd-mod_auth>${LIGHTTPD_VERSION} \
+    "lighttpd>${LIGHTTPD_VERSION}" \
+    "lighttpd-mod_auth>${LIGHTTPD_VERSION}" \
     ; \
   mkdir -p \
     /var/www \
